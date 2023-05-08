@@ -1,0 +1,26 @@
+Code:
+class Solution {
+public:
+// function to check if two trees are mirror 
+bool isSameTree(TreeNode *root1, TreeNode *root2){
+    // if both the trees are NULL, return true
+    if (!root1 && !root2){
+        return true;
+    }
+    // if one is null, other is not null
+    if (!root1 || !root2){
+        return false;
+    }
+    bool left = isSameTree(root1->left, root2->left);
+    bool right = isSameTree(root1->right, root2->right);
+    // if we get true from both the sides, and the value of nodes are also same,
+    // return true 
+    if (left && right && root1->val == root2->val){
+        return true;
+    }
+    // else return false;
+    else{
+        return false;
+    }
+}
+};
