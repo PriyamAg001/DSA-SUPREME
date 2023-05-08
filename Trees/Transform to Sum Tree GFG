@@ -1,0 +1,27 @@
+Code:
+class Solution {
+  public:
+  
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    int convertIntoSumTree(Node* root){
+        // Base Case 
+        if(root == NULL){
+            return 0;
+        }
+        
+        int leftAns = convertIntoSumTree(root -> left);
+        int rightAns = convertIntoSumTree(root -> right);
+        int ans = root -> data;
+        root -> data = leftAns + rightAns;
+        return root -> data + ans;
+    }
+    void toSumTree(Node *root)
+    {
+        // Your code here
+        if(root == NULL){
+            return;
+        }
+        convertIntoSumTree(root);
+    }
+};
