@@ -1,0 +1,26 @@
+Code:
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // Base Case:
+        if(root == NULL){
+            return NULL;
+     
+
+        // Case 1:
+        if(p->val < root->val && q->val < root->val){
+            return lowestCommonAncestor(root->left, p, q);
+        }
+
+        // Case 2:
+        if(p->val > root->val && q->val > root->val){
+            return lowestCommonAncestor(root->right, p, q);
+        }
+
+        // Case 3 and Case 4:
+        return root;
+    }
+};
+
+Complexity:
+Time complexity: O(log n)
