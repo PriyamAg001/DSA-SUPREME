@@ -1,0 +1,40 @@
+Code:
+class Solution {
+public:
+    void storeInOrderTraversal(TreeNode* root, vector<int> &inOrderTraversal){
+        if(root == NULL){
+            return;
+        }
+        storeInOrderTraversal(root->left, inOrderTraversal);
+        inOrderTraversal.push_back(root->val);
+        storeInOrderTraversal(root->right, inOrderTraversal);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> inOrderTraversal;
+        storeInOrderTraversal(root, inOrderTraversal);
+
+        int start = 0;
+        int end = inOrderTraversal.size() - 1;
+
+        while(start < end){
+            int sum = inOrderTraversal[start] + inOrderTraversal[end];
+            if(sum == k){
+                return true;
+            }
+            
+            if(sum > k){
+                end--;
+            }
+            
+            else{
+                start++;
+            }
+        }
+        return false;
+    }
+};
+
+Complexity:
+Time complexity: O(n)
+Space complexity: O(n)
