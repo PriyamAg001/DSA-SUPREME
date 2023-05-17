@@ -1,0 +1,31 @@
+Code:
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int &k) {
+        // Base Case:
+        if(root == NULL){
+            return -1; // -1 reflects Base Condition reached
+        }
+
+        // Case 1: INORDER
+        // L -> left
+        int leftAns = kthSmallest(root->left, k);
+        if (leftAns != -1) {
+            return leftAns;
+        }
+
+        // N -> root
+        k--;
+        if(k == 0){
+            return root->val;
+        }
+
+        // R -> right
+        int rightAns = kthSmallest(root->right, k);
+        return rightAns;
+    }
+};
+
+Complexity:
+Time complexity: O(N+k)
+Space complexity: O(N)
