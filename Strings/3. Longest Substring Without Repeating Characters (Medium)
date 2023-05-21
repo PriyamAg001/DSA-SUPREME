@@ -1,0 +1,50 @@
+// OPTIMAL APPROACH:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string str) {
+        int max = 0;
+        vector<int> chars(128, -1);
+        int i = 0;
+        for (int j = 0; j < str.length(); j++) {
+           if (chars[str[j]] + 1 > i) {
+               i = chars[str[j]] + 1;
+            }
+            chars[str[j]] = j;
+            max = max > (j - i + 1) ? max : (j - i + 1);
+        }
+        return max;
+    }
+};
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+/* BRUTE FORCE APPROACH:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string str) {
+        int max = 0;
+        for(int i=0; i < str.length(); i++){
+            string str1 = "";
+            for(int j=i; j < str.length(); j++){
+                bool found = false;
+                for (int k=0; k < str1.length(); k++) {
+                    if (str1[k] == str[j]) {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    str1 = str1 + str[j];
+                }
+                else{
+                    break;
+                }
+                if (str1.length() > max) {
+                    max = str1.length();
+                }
+            }
+        }
+        return max;
+    }
+}; */
