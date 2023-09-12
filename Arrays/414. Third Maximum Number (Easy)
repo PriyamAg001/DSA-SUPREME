@@ -1,0 +1,38 @@
+Code:
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        int n = nums.size();
+        int a = INT_MIN;
+        int b = INT_MIN;
+        int c =INT_MIN;
+
+        bool flag = 0;
+        for(int i=0; i<n; i++){
+            a = max(a, nums[i]);
+        }
+
+        for(int i=0; i<n; i++){
+            if(nums[i] != a){
+                b = max(b, nums[i]);
+            }
+        }
+
+        for(int i=0; i<n; i++){
+            if(nums[i] != a && nums[i] != b){
+                c = max(c, nums[i]);
+                flag = 1;
+            }
+        }
+
+        if(flag == 1){
+            return c;
+        }
+        else{
+            return a;
+        }
+    }
+};
+
+Time complexity: O(n)
+Space complexity: O(1)
