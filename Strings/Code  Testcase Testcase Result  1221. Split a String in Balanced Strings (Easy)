@@ -1,0 +1,26 @@
+Code:
+class Solution {
+public:
+    int balancedStringSplit(string s) {
+        int count = 0;
+        int countR = 0;
+        int countL = 0;
+        int n = s.length();
+        for(int i=0; i<n; i++){
+            if(s[i] == 'R'){
+                countR++;
+            }
+            else{
+                countL++;
+            }
+            if(countR == countL){
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+Complexity:
+Time complexity: O(n)
+Space complexity: O(n)
