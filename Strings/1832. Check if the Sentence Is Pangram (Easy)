@@ -1,0 +1,36 @@
+Code:
+class Solution {
+public:
+    bool checkIfPangram(string sentence) {
+        bool isPresent[26] = {0};
+        int n = sentence.length();
+        
+        int pos = -1;
+        if(n < 26){ // if sentence does not have 26 letters. it is definately not a Panagram
+            return 0;
+        }
+ 
+        for(int i=0; i<n; i++) {
+            // if we store sentence.at(i) ASCII value of that character will be stored  
+            // we subtract 'a' we get the character's position
+            // Example -> sentence.at(i) is 'd'
+            // pos will be (100 - 97) = 3
+            // ASCII of 'd' is 100 and of 'a' is 97
+            // and in isPresent array at position 3 true will be marked
+            
+            pos = sentence[i] - 'a';
+            isPresent[pos] = 1;
+        }
+
+        for(int i=0; i<26; i++){
+            if(isPresent[i] != 1){
+                return 0;
+            }
+        }
+        return 1;
+    }
+};
+
+Complexity:
+Time complexity: O(n)
+Space complexity: O(1)
