@@ -1,0 +1,78 @@
+// Sliding Window Approach: 
+class Solution {
+public:
+    static bool cmp(pair<int, int> a, pair<int, int> b){
+        return a.first < b.first;
+    }
+
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        vector<pair<int, int>> data;
+        for(int i=0; i<n; i++){
+            int val = nums[i];
+            int index = i;
+            data.push_back({val, index});
+        }
+        sort(data.begin(), data.end(), cmp);
+
+        int start = 0;
+        int end = data.size() - 1;
+        vector<int> ans;
+        while(start < end){
+            //  Case 1: Equal
+            if(data[start].first + data[end].first == target){
+                ans.push_back(data[start].second);
+                ans.push_back(data[end].second);
+                break;
+            }
+
+            // Case 2: Greater
+            else if(data[start].first + data[end].first > target){
+                end--;
+            }
+
+            // Case 3: Lesser
+            else{
+                start++;
+            }
+        }
+        return ans;
+    }
+};
+
+// Brute Force Approach:
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (nums[i] + nums[j] == target) {
+                    ans.push_back(i);
+                    ans.push_back(j);
+                    return ans; // return immediately once the pair is found
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+// Using One-Pass Hash Table Approach:
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        
+        unorderd_map<int, int> map;
+        for(int i=0; i<n; i++){
+            int complement = target - nums[i];
+            if(map.find(complement) != map.end()){
+                return {map[complement], i};
+            }
+            map.insert({nums[i], i});
+        }
+        return {};
+    }
+};
+
